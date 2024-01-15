@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import useAudioStore from '../../store/store'
+import useAudioStore from '../../store/Audio.store'
 
 const HomePage: React.FC = () => {
   const { setAudioStream, setFile } = useAudioStore()
@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
 
     mediaRecorder.current.start()
     const localAudioChunks: Blob[] = []
-    mediaRecorder.current.ondataavailable = event => {
+    mediaRecorder.current.ondataavailable = (event) => {
       if (typeof event.data === 'undefined') {
         return
       }
@@ -67,7 +67,7 @@ const HomePage: React.FC = () => {
     }
 
     const interval = setInterval(() => {
-      setDuration(curr => curr + 1)
+      setDuration((curr) => curr + 1)
     }, 1000)
 
     return () => clearInterval(interval)
@@ -76,7 +76,7 @@ const HomePage: React.FC = () => {
   return (
     <main className="flex-1 p-4 flex flex-col gap-3 text-center sm:gap-4 justify-center pb-20">
       <h1 className="font-semibold text-5xl sm:text-6xl md:text-7xl">
-        Free<span className="text-blue-400 bold">Scribe</span>
+        Scr<span className="text-blue-400 bold">iber</span>
       </h1>
       <h3 className="font-medium md:text-lg">
         Record <span className="text-blue-400">&rarr;</span> Transcribe{' '}
@@ -104,7 +104,7 @@ const HomePage: React.FC = () => {
         <label className="text-blue-400 cursor-pointer hover:text-blue-600 duration-200">
           upload{' '}
           <input
-            onChange={e => {
+            onChange={(e) => {
               const tempFile = e.target.files?.[0]
               tempFile && setFile(tempFile)
             }}
